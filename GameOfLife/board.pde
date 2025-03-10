@@ -7,10 +7,9 @@ class  Board {
     for (int i=0; i<col; i++) {
       for (int j = 0; j<row; j++)
       {
-        if (i%2 == 0 && j%2 == 0 || i%2== 1 && j%2 == 1)
-          board[i][j] = 1;
-        else
-          board[i][j] = 0;
+        
+          board[i][j] = (int)random(2);
+        
       }
     }
   }
@@ -23,10 +22,7 @@ class  Board {
     for (int i=0; i<col; i++) {
       for (int j = 0; j<row; j++)
       {
-        if (i%2 == 0 && j%2 == 0 || i%2== 1 && j%2 == 1)
-          board[i][j] = 1;
-        else
-          board[i][j] = 0;
+        board[i][j] = (int)random(2);
       }
     }
   }
@@ -46,9 +42,42 @@ class  Board {
     }
   }
 
-  void countN(){
-  
-  
+  int countN(int _i, int _j) {
+    int n = 0;
+    for (int k = -1; k <=1; k++) {
+      for (int l = -1; l<=1; l++) {
+        n += board[_i+k][_j+l];
+      }
+    }
+    n -= board[_i][_j];
+    return n;
   }
-  
+
+  void nextGen() {
+    int[][] temp = Create2DArray();  
+    for (int i= 1; i<col-1; i++) {
+      for (int j = 1; j <row-1; j++) {
+        if (countN(i, j) < 2)
+          temp[i][j] = 0;
+        else if (countN(i, j) > 3)
+          temp[i][j] = 0;
+        else if (countN(i, j) == 3)
+          temp[i][j] =1;
+        else
+          temp[i][j] = board[i][j];
+      }
+    }
+    board = temp;
+  }
+
+  int[][] Create2DArray() {
+    int[][] temp = new int[col][row];
+    for (int i=0; i <col; i++) {
+      for (int j =0; j<row; j++) {
+        temp[i][j] = 0;
+      }
+    }
+
+    return temp;
+  }
 }

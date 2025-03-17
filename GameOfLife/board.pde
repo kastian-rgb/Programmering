@@ -67,48 +67,6 @@ class  Board {
     return n;
   }
 
-  void nextGen() {
-    Cell[][] temp = Create2DArray();  
-    for (int i= 1; i<col-1; i++) {
-      for (int j = 1; j <row-1; j++) {
-        if (countN(i, j) < 2){
-          temp[i][j].setColor(color(0,0,255));
-          temp[i][j].setValue(0);}
-        else if (countN(i, j) > 3){
-          temp[i][j].setColor(color(255,0,0));
-          temp[i][j].setValue(0);}
-        else if (countN(i, j) == 3){
-          temp[i][j].setColor(color(0,255,0));
-          temp[i][j].setValue(1);}
-        else{
-          temp[i][j].setColor(board[i][j].getColor());
-          temp[i][j].setValue(board[i][j].getValue());}
-      }
-    }
-    board = temp;
-  }
-
-  void nextGen2() {
-    Cell[][] temp = Create2DArray();  
-    for (int i= 1; i<col-1; i++) {
-      for (int j = 1; j <row-1; j++) {
-        if (countColor(i, j, color(0,255,0)) == 3){
-          temp[i][j].setColor(color(0,255,0));
-          temp[i][j].setValue(1);}
-        else if (countColor(i, j, color(255,0,0)) == 3){
-          temp[i][j].setColor(color(255,0,0));
-          temp[i][j].setValue(1);}
-          else if (countColor(i, j, color(0,0,255)) == 3){
-          temp[i][j].setColor(color(0,0,255));
-          temp[i][j].setValue(1);}
-        else{
-          temp[i][j].setColor(board[i][j].getColor());
-          temp[i][j].setValue(board[i][j].getValue());}
-      }
-    }
-    board = temp;
-  }
-
   Cell[][] Create2DArray() {
     Cell[][] temp = new Cell[col][row];
     for (int i=0; i <col; i++) {
@@ -119,4 +77,22 @@ class  Board {
 
     return temp;
   }
+  
+  
+  void emptyBoard(){
+  board = Create2DArray();
+  }
+  
+  void initBoard(int _value, color _c){
+  emptyBoard();
+  for(int i =0;i<col;i++){
+  for(int j =0; j<row;j++){
+  board[i][j].setValue(_value);
+  board[i][j].setColor(_c);
+  }
+  }
+  
+  
+  }
+  
 }

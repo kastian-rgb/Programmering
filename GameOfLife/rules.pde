@@ -14,7 +14,7 @@ class rules {
           temp[i][j].setColor(color(0,0,255));
           temp[i][j].setValue(0);}
         else if (b.countN(i, j) > 3){
-          temp[i][j].setColor(color(255,0,0));
+          temp[i][j].setColor(color(0,0,255));
           temp[i][j].setValue(0);}
         else if (b.countN(i, j) == 3){
           temp[i][j].setColor(color(0,255,0));
